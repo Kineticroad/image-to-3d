@@ -1,0 +1,9 @@
+# GUI
+PySide6>=6.8
+
+# Meshy API 통신
+httpx>=0.27
+httpx-sse>=0.4
+
+# API 키를 OS 보안 저장소에 보관
+keyring>=25.0

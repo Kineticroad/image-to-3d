@@ -1,0 +1,10 @@
+# 패키징
+pyinstaller>=6.10
+
+# 테스트
+pytest>=8.0
+pytest-qt>=4.4
+respx>=0.21
+
+# 린트·포맷
+ruff>=0.6
