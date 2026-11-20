@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsDialog</class>
+ <widget class="QDialog" name="SettingsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>480</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>설정</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="dialogLayout">
+   <property name="spacing">
+    <number>24</number>
+   </property>
+   <property name="leftMargin">
+    <number>24</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>24</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="apiKeySectionLayout">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="apiKeyTitleLabel">
+       <property name="text">
+        <string>Meshy API 키</string>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">sectionTitle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="apiKeyHintLabel">
+       <property name="text">
+        <string>키는 OS 보안 저장소(macOS 키체인 / Windows 자격 증명 관리자)에 keyring으로 보관되며 파일로 남지 않습니다.</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">muted</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="apiKeyRowLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="apiKeyEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>msy_…</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">mono</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="showApiKeyButton">
+         <property name="text">
+          <string>표시</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="variant" stdset="0">
+          <string notr="true">secondary</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="testConnectionRowLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="testConnectionButton">
+         <property name="toolTip">
+          <string>잔액 조회(GET /openapi/v1/balance)로 키를 확인합니다. 크레딧이 들지 않습니다.</string>
+         </property>
+         <property name="text">
+          <string>연결 테스트</string>
+         </property>
+         <property name="variant" stdset="0">
+          <string notr="true">secondary</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="connectionStatusLabel">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">secondary</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="testConnectionSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="apiKeyDocsLinkLabel">
+         <property name="text">
+          <string>&lt;a href=&quot;https://docs.meshy.ai/api/authentication&quot; style=&quot;color:#9D85FF; text-decoration:none;&quot;&gt;API 키 안내 ↗&lt;/a&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::TextFormat::RichText</enum>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">link</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="outputSectionLayout">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="outputTitleLabel">
+       <property name="text">
+        <string>저장 위치</string>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">sectionTitle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="outputHintLabel">
+       <property name="text">
+        <string>완료된 모델은 작업별 폴더에 자동으로 저장됩니다.</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">muted</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="outputRowLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="outputDirEdit">
+         <property name="text">
+          <string>~/Documents/MeshyDesktop</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">mono</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseOutputDirButton">
+         <property name="text">
+          <string>변경…</string>
+         </property>
+         <property name="variant" stdset="0">
+          <string notr="true">secondary</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="formatSectionLayout">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="formatTitleLabel">
+       <property name="text">
+        <string>자동 다운로드 형식</string>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">sectionTitle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="formatHintLabel">
+       <property name="text">
+        <string>선택한 형식과 썸네일을 완료 즉시 내려받습니다. (서버 보관 3일)</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">muted</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="formatRowLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="glbCheck">
+         <property name="text">
+          <string>GLB</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">formatToggle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="fbxCheck">
+         <property name="text">
+          <string>FBX</string>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">formatToggle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="objCheck">
+         <property name="text">
+          <string>OBJ</string>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">formatToggle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="usdzCheck">
+         <property name="text">
+          <string>USDZ</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">formatToggle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="stlCheck">
+         <property name="text">
+          <string>STL</string>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">formatToggle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="formatRowSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="notifySectionLayout">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="notifyTitleLabel">
+       <property name="text">
+        <string>알림</string>
+       </property>
+       <property name="role" stdset="0">
+        <string notr="true">sectionTitle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="notifyRowLayout">
+       <item>
+        <widget class="QLabel" name="notifyLabel">
+         <property name="text">
+          <string>작업이 끝나면 시스템 알림 보내기</string>
+         </property>
+         <property name="buddy">
+          <cstring>notifyOnCompleteCheck</cstring>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">secondary</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="notifyRowSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="notifyOnCompleteCheck">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">switch</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="dialogSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>apiKeyEdit</tabstop>
+  <tabstop>showApiKeyButton</tabstop>
+  <tabstop>testConnectionButton</tabstop>
+  <tabstop>browseOutputDirButton</tabstop>
+  <tabstop>glbCheck</tabstop>
+  <tabstop>fbxCheck</tabstop>
+  <tabstop>objCheck</tabstop>
+  <tabstop>usdzCheck</tabstop>
+  <tabstop>stlCheck</tabstop>
+  <tabstop>notifyOnCompleteCheck</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>530</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>530</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

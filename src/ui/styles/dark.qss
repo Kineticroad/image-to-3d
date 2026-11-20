@@ -1,0 +1,306 @@
+/*
+ * Image to 3D - Dark theme
+ * Figma "Meshy Desktop UI" 색상 토큰(변수 컬렉션 "Meshy Desktop")을 그대로 옮긴 값입니다.
+ *
+ *   bg/app        #0F1115    text/primary    #E8EAED    accent/default  #7C5CFF
+ *   bg/panel      #161A20    text/secondary  #A0A8B4    accent/subtle   #2A2350
+ *   bg/elevated   #1E232B    text/muted      #6B7280    status/success  #22C55E
+ *   bg/hover      #262C36    border/default  #2A303A    status/warning  #F59E0B
+ *                            border/strong   #3A4250    status/danger   #EF4444
+ *
+ * 위젯은 objectName 또는 동적 속성으로 꾸밉니다.
+ *   variant = primary | secondary | ghost | format     (QPushButton)
+ *   role    = sectionTitle | pageTitle | muted | chip | switch | ...
+ *   status  = pending | in_progress | succeeded | failed   (role=chip)
+ * 런타임에 status 같은 속성을 바꾼 뒤에는 style().unpolish(w); style().polish(w) 를 호출하세요.
+ * @ICONS@ 는 로더가 src/ui/icons 의 절대 경로로 바꿉니다.
+ */
+
+/* ---------- 기본 ---------- */
+QWidget {
+    color: #E8EAED;
+    font-size: 13px;
+}
+
+QMainWindow, QDialog, #centralWidget, #centerPanel {
+    background: #0F1115;
+}
+
+QToolTip {
+    background: #1E232B;
+    color: #E8EAED;
+    border: 1px solid #3A4250;
+    padding: 4px 8px;
+}
+
+/* ---------- 영역 ---------- */
+#headerBar {
+    background: #161A20;
+    border-bottom: 1px solid #2A303A;
+}
+
+#sidebar {
+    background: #161A20;
+    border-right: 1px solid #2A303A;
+}
+
+#rightPanel {
+    background: #161A20;
+    border-left: 1px solid #2A303A;
+}
+
+QSplitter::handle {
+    background: #2A303A;
+}
+
+QStatusBar {
+    background: #161A20;
+    border-top: 1px solid #2A303A;
+    color: #6B7280;
+    font-size: 11px;
+}
+
+QStatusBar::item { border: none; }
+QStatusBar QLabel {
+    color: #6B7280;
+    font-size: 11px;
+    padding: 0 8px;
+}
+
+/* ---------- 텍스트 ---------- */
+QLabel[role="appTitle"]     { font-weight: 700; }
+QLabel[role="pageTitle"]    { font-size: 20px; font-weight: 700; }
+QLabel[role="sectionTitle"] { font-size: 14px; font-weight: 700; }
+QLabel[role="itemTitle"]    { font-weight: 500; }
+QLabel[role="strong"]       { font-weight: 700; }
+QLabel[role="secondary"]    { color: #A0A8B4; }
+QLabel[role="muted"]        { color: #6B7280; font-size: 12px; }
+QLabel[role="mono"]         { color: #6B7280; font-size: 11px; }
+QLabel[role="dropTitle"]    { font-size: 14px; font-weight: 500; }
+QLabel[role="dropIcon"]     { color: #7C5CFF; font-size: 32px; font-weight: 300; }
+QLabel[role="link"]         { color: #7C5CFF; }
+
+QLabel[role="creditBadge"] {
+    background: #2A2350;
+    border-radius: 11px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+QLabel[role="thumbnail"] {
+    background: #1E232B;
+    border: 1px solid #2A303A;
+    border-radius: 6px;
+}
+
+QLabel[role="notice"] {
+    background: rgba(245, 158, 11, 30);
+    color: #A0A8B4;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 11px;
+}
+
+/* ---------- 상태 칩 (Meshy task status) ---------- */
+QLabel[role="chip"] {
+    min-width: 48px;
+    max-width: 48px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+QLabel[role="chip"][status="pending"]     { background: #262C36;               color: #A0A8B4; }
+QLabel[role="chip"][status="in_progress"] { background: rgba(124, 92, 255, 41); color: #9D85FF; }
+QLabel[role="chip"][status="succeeded"]   { background: rgba(34, 197, 94, 41);  color: #22C55E; }
+QLabel[role="chip"][status="failed"]      { background: rgba(239, 68, 68, 41);  color: #EF4444; }
+
+/* ---------- 버튼 ---------- */
+QPushButton {
+    background: #1E232B;
+    color: #E8EAED;
+    border: 1px solid #2A303A;
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-weight: 500;
+}
+QPushButton:hover    { background: #262C36; }
+QPushButton:pressed  { background: #2A303A; }
+QPushButton:disabled { color: #6B7280; background: #161A20; border-color: #2A303A; }
+QPushButton:focus    { border-color: #7C5CFF; }
+
+QPushButton[variant="primary"] {
+    background: #7C5CFF;
+    color: #FFFFFF;
+    border: 1px solid #7C5CFF;
+}
+QPushButton[variant="primary"]:hover    { background: #8E73FF; border-color: #8E73FF; }
+QPushButton[variant="primary"]:pressed  { background: #6A4BEB; }
+QPushButton[variant="primary"]:disabled { background: #2A2350; border-color: #2A2350; color: #A0A8B4; }
+
+QPushButton[variant="ghost"] {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #A0A8B4;
+}
+QPushButton[variant="ghost"]:hover { background: #1E232B; color: #E8EAED; }
+
+QPushButton[variant="format"] {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+QPushButton[variant="secondary"]:checked {
+    background: #2A2350;
+    border-color: #7C5CFF;
+}
+
+/* ---------- 드롭존 / 카드 / 뷰어 ---------- */
+#dropZone {
+    background: #161A20;
+    border: 1.5px dashed #3A4250;
+    border-radius: 12px;
+}
+#dropZone:hover,
+#dropZone[dragActive="true"] {
+    border-color: #7C5CFF;
+    background: #1A1A2E;
+}
+#dropZoneStack, #dropEmptyPage, #dropPreviewPage { background: transparent; }
+
+#optionsCard {
+    background: #161A20;
+    border: 1px solid #2A303A;
+    border-radius: 12px;
+}
+#optionsCard QLabel { background: transparent; }
+
+#viewerContainer {
+    background: #1E232B;
+    border: 1px solid #2A303A;
+    border-radius: 10px;
+}
+
+/* ---------- 입력 ---------- */
+QLineEdit, QComboBox, QSpinBox {
+    background: #1E232B;
+    border: 1px solid #2A303A;
+    border-radius: 6px;
+    padding: 6px 10px;
+    selection-background-color: #7C5CFF;
+}
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus { border-color: #7C5CFF; }
+QLineEdit:read-only { color: #A0A8B4; }
+
+/* 버튼 없는 스핀박스: subcontrol-origin 을 지정하지 않으면 입력칸 폭이 0 으로 줄어듭니다 */
+QAbstractSpinBox::up-button, QAbstractSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 0px;
+    border: none;
+}
+QAbstractSpinBox QLineEdit {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+QComboBox::drop-down { border: none; width: 24px; }
+QComboBox QAbstractItemView {
+    background: #1E232B;
+    border: 1px solid #3A4250;
+    selection-background-color: #262C36;
+    outline: none;
+}
+
+/* 스위치처럼 보이는 체크박스 (role=switch) */
+QCheckBox[role="switch"]::indicator {
+    width: 36px;
+    height: 20px;
+}
+QCheckBox[role="switch"]::indicator:unchecked { image: url(@ICONS@/switch_off.svg); }
+QCheckBox[role="switch"]::indicator:checked   { image: url(@ICONS@/switch_on.svg); }
+
+/* 형식 선택 체크박스 (role=formatToggle) - 칩 모양 */
+QCheckBox[role="formatToggle"] {
+    background: #1E232B;
+    border: 1px solid #2A303A;
+    border-radius: 6px;
+    padding: 5px 12px;
+    color: #6B7280;
+    font-size: 12px;
+}
+QCheckBox[role="formatToggle"]::indicator { width: 0px; height: 0px; border: none; image: none; }
+QCheckBox[role="formatToggle"]:checked {
+    background: #2A2350;
+    border-color: #7C5CFF;
+    color: #E8EAED;
+}
+
+/* 세그먼트 컨트롤 (role=segment 라디오 버튼) */
+#topologySegment {
+    background: #1E232B;
+    border: 1px solid #2A303A;
+    border-radius: 6px;
+}
+QRadioButton[role="segment"] {
+    spacing: 0px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    color: #A0A8B4;
+    font-size: 12px;
+    font-weight: 500;
+}
+QRadioButton[role="segment"]::indicator { width: 0px; height: 0px; border: none; image: none; }
+QRadioButton[role="segment"]:checked {
+    background: #7C5CFF;
+    color: #FFFFFF;
+}
+
+/* ---------- 진행률 ---------- */
+QProgressBar {
+    background: #262C36;
+    border: none;
+    border-radius: 3px;
+    min-height: 6px;
+    max-height: 6px;
+}
+QProgressBar::chunk {
+    background: #7C5CFF;
+    border-radius: 3px;
+}
+
+/* ---------- 작업 목록 ---------- */
+QListWidget {
+    background: transparent;
+    outline: none;
+}
+QListWidget::item {
+    border-radius: 8px;
+}
+QListWidget::item:hover    { background: #1E232B; }
+QListWidget::item:selected { background: #262C36; }
+
+/* ---------- 구분선 / 스크롤바 / 메뉴 ---------- */
+#rightPanelDivider {
+    background: #262C36;
+    border: none;
+    max-height: 1px;
+}
+
+QScrollBar:vertical { background: transparent; width: 8px; margin: 0; }
+QScrollBar::handle:vertical { background: #3A4250; border-radius: 4px; min-height: 24px; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none; }
+
+QMenuBar { background: #161A20; }
+QMenuBar::item:selected { background: #262C36; }
+QMenu {
+    background: #1E232B;
+    border: 1px solid #3A4250;
+    padding: 4px;
+}
+QMenu::item { padding: 6px 20px; border-radius: 4px; }
+QMenu::item:selected { background: #262C36; }
+
+QDialogButtonBox QPushButton { min-width: 72px; }

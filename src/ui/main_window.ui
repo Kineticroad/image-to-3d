@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1080</width>
+    <height>680</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Image to 3D</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="centralLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="headerBar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>48</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="headerLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="leftMargin">
+        <number>16</number>
+       </property>
+       <property name="topMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="appTitleLabel">
+         <property name="text">
+          <string>Image to 3D</string>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">appTitle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="headerSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="creditBadgeLabel">
+         <property name="toolTip">
+          <string>남은 크레딧 (GET /openapi/v1/balance)</string>
+         </property>
+         <property name="text">
+          <string>크레딧 –</string>
+         </property>
+         <property name="role" stdset="0">
+          <string notr="true">creditBadge</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="settingsButton">
+         <property name="text">
+          <string>설정</string>
+         </property>
+         <property name="variant" stdset="0">
+          <string notr="true">ghost</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>1</number>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
+      <widget class="QFrame" name="sidebar">
+       <property name="minimumSize">
+        <size>
+         <width>240</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>360</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="sidebarLayout">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>16</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>16</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="sidebarHeaderLayout">
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="jobListTitleLabel">
+            <property name="text">
+             <string>작업 목록</string>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">sectionTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="sidebarHeaderSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="jobCountLabel">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">muted</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="newJobButton">
+          <property name="text">
+           <string>+  새 작업</string>
+          </property>
+          <property name="variant" stdset="0">
+           <string notr="true">secondary</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="jobListWidget">
+          <property name="frameShape">
+           <enum>QFrame::Shape::NoFrame</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+          </property>
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="uniformItemSizes">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="centerPanel">
+       <layout class="QVBoxLayout" name="centerLayout">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <property name="leftMargin">
+         <number>32</number>
+        </property>
+        <property name="topMargin">
+         <number>24</number>
+        </property>
+        <property name="rightMargin">
+         <number>32</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="headingLayout">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="pageTitleLabel">
+            <property name="text">
+             <string>새 3D 모델 만들기</string>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">pageTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="pageSubtitleLabel">
+            <property name="text">
+             <string>이미지 한 장을 올리면 Meshy AI Image to 3D로 모델을 만들어 줍니다.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">secondary</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QFrame" name="dropZone">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="acceptDrops">
+           <bool>true</bool>
+          </property>
+          <property name="toolTip">
+           <string>JPG · PNG · WebP, 최대 20MB</string>
+          </property>
+          <layout class="QVBoxLayout" name="dropZoneLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QStackedWidget" name="dropZoneStack">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="dropEmptyPage">
+              <layout class="QVBoxLayout" name="dropEmptyLayout">
+               <property name="spacing">
+                <number>8</number>
+               </property>
+               <item>
+                <spacer name="dropEmptyTopSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="dropIconLabel">
+                 <property name="text">
+                  <string>↑</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="role" stdset="0">
+                  <string notr="true">dropIcon</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="dropTitleLabel">
+                 <property name="text">
+                  <string>이미지를 여기로 끌어다 놓거나 클릭해서 선택하세요</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="role" stdset="0">
+                  <string notr="true">dropTitle</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="dropHintLabel">
+                 <property name="text">
+                  <string>JPG · PNG · WebP  ·  최대 20MB</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="role" stdset="0">
+                  <string notr="true">muted</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="dropEmptyBottomSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="dropPreviewPage">
+              <layout class="QHBoxLayout" name="dropPreviewLayout">
+               <property name="spacing">
+                <number>16</number>
+               </property>
+               <property name="leftMargin">
+                <number>20</number>
+               </property>
+               <property name="topMargin">
+                <number>16</number>
+               </property>
+               <property name="rightMargin">
+                <number>20</number>
+               </property>
+               <property name="bottomMargin">
+                <number>16</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="imagePreviewLabel">
+                 <property name="minimumSize">
+                  <size>
+                   <width>136</width>
+                   <height>136</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>136</width>
+                   <height>136</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="role" stdset="0">
+                  <string notr="true">thumbnail</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="selectedFileLayout">
+                 <property name="spacing">
+                  <number>4</number>
+                 </property>
+                 <item>
+                  <spacer name="selectedFileTopSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>10</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="selectedFileNameLabel">
+                   <property name="text">
+                    <string>파일 이름.jpg</string>
+                   </property>
+                   <property name="role" stdset="0">
+                    <string notr="true">dropTitle</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="selectedFileInfoLabel">
+                   <property name="text">
+                    <string>1024 × 1024 · 2.4MB</string>
+                   </property>
+                   <property name="role" stdset="0">
+                    <string notr="true">muted</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="selectedFileButtonsLayout">
+                   <property name="spacing">
+                    <number>8</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>8</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="changeImageButton">
+                     <property name="text">
+                      <string>다른 이미지 선택</string>
+                     </property>
+                     <property name="variant" stdset="0">
+                      <string notr="true">secondary</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="clearImageButton">
+                     <property name="text">
+                      <string>지우기</string>
+                     </property>
+                     <property name="variant" stdset="0">
+                      <string notr="true">ghost</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="selectedFileButtonsSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Orientation::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="selectedFileBottomSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>10</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="optionsCard">
+          <layout class="QVBoxLayout" name="optionsCardLayout">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <property name="leftMargin">
+            <number>20</number>
+           </property>
+           <property name="topMargin">
+            <number>16</number>
+           </property>
+           <property name="rightMargin">
+            <number>20</number>
+           </property>
+           <property name="bottomMargin">
+            <number>16</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="optionsTitleLabel">
+             <property name="text">
+              <string>생성 옵션</string>
+             </property>
+             <property name="role" stdset="0">
+              <string notr="true">sectionTitle</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QFormLayout" name="optionsFormLayout">
+             <property name="labelAlignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignVCenter</set>
+             </property>
+             <property name="formAlignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignTop</set>
+             </property>
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::FieldGrowthPolicy::FieldsStayAtSizeHint</enum>
+             </property>
+             <property name="horizontalSpacing">
+              <number>24</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>14</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="aiModelLabel">
+               <property name="toolTip">
+                <string>ai_model</string>
+               </property>
+               <property name="text">
+                <string>AI 모델</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="aiModelCombo">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>latest (기본)</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="textureLabel">
+               <property name="toolTip">
+                <string>should_texture · 끄면 크레딧이 줄어듭니다</string>
+               </property>
+               <property name="text">
+                <string>텍스처 생성</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="textureCheck">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">switch</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="pbrLabel">
+               <property name="toolTip">
+                <string>enable_pbr · metallic / roughness / normal 맵</string>
+               </property>
+               <property name="text">
+                <string>PBR 맵</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="pbrCheck">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">switch</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="topologyLabel">
+               <property name="toolTip">
+                <string>topology</string>
+               </property>
+               <property name="text">
+                <string>토폴로지</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QFrame" name="topologySegment">
+               <layout class="QHBoxLayout" name="topologySegmentLayout">
+                <property name="spacing">
+                 <number>2</number>
+                </property>
+                <property name="leftMargin">
+                 <number>2</number>
+                </property>
+                <property name="topMargin">
+                 <number>2</number>
+                </property>
+                <property name="rightMargin">
+                 <number>2</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>2</number>
+                </property>
+                <item>
+                 <widget class="QRadioButton" name="topologyTriangleRadio">
+                  <property name="text">
+                   <string>삼각형</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                  <property name="role" stdset="0">
+                   <string notr="true">segment</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">topologyButtonGroup</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="topologyQuadRadio">
+                  <property name="text">
+                   <string>사각형</string>
+                  </property>
+                  <property name="role" stdset="0">
+                   <string notr="true">segment</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">topologyButtonGroup</string>
+                  </attribute>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="polycountLabel">
+               <property name="toolTip">
+                <string>target_polycount</string>
+               </property>
+               <property name="text">
+                <string>목표 폴리곤 수</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="polycountSpin">
+               <property name="minimumSize">
+                <size>
+                 <width>140</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+               </property>
+               <property name="showGroupSeparator">
+                <bool>true</bool>
+               </property>
+               <property name="minimum">
+                <number>100</number>
+               </property>
+               <property name="maximum">
+                <number>300000</number>
+               </property>
+               <property name="singleStep">
+                <number>1000</number>
+               </property>
+               <property name="value">
+                <number>30000</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="centerSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="actionBarLayout">
+          <property name="spacing">
+           <number>12</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="costLayout">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="costLabel">
+              <property name="text">
+               <string>예상 비용 &lt;b&gt;30 크레딧&lt;/b&gt;</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::TextFormat::RichText</enum>
+              </property>
+              <property name="role" stdset="0">
+               <string notr="true">secondary</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="refundHintLabel">
+              <property name="text">
+               <string>실패(FAILED) 시에만 환불됩니다</string>
+              </property>
+              <property name="role" stdset="0">
+               <string notr="true">muted</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="actionBarSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cancelButton">
+            <property name="text">
+             <string>취소</string>
+            </property>
+            <property name="variant" stdset="0">
+             <string notr="true">ghost</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="generateButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>3D 모델 생성</string>
+            </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
+            <property name="variant" stdset="0">
+             <string notr="true">primary</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="rightPanel">
+       <property name="minimumSize">
+        <size>
+         <width>320</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>440</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="rightPanelLayout">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>24</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="previewHeaderLayout">
+          <item>
+           <widget class="QLabel" name="previewTitleLabel">
+            <property name="text">
+             <string>미리보기</string>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">sectionTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="previewHeaderSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="currentFileLabel">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="role" stdset="0">
+             <string notr="true">muted</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QFrame" name="viewerContainer">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>260</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="viewerLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="viewerPlaceholderLabel">
+             <property name="text">
+              <string>3D 뷰어 영역</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+             <property name="role" stdset="0">
+              <string notr="true">secondary</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="progressSection" native="true">
+          <layout class="QVBoxLayout" name="progressLayout">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="progressHeaderLayout">
+             <item>
+              <widget class="QLabel" name="statusChipLabel">
+               <property name="text">
+                <string>대기</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">chip</string>
+               </property>
+               <property name="status" stdset="0">
+                <string notr="true">pending</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="progressHeaderSpacer">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="progressPercentLabel">
+               <property name="text">
+                <string>0%</string>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">strong</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QProgressBar" name="progressBar">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>6</height>
+              </size>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+             <property name="textVisible">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="progressMetaLayout">
+             <item>
+              <widget class="QLabel" name="taskIdLabel">
+               <property name="text">
+                <string>task –</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::TextInteractionFlag::TextSelectableByMouse</set>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">mono</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="progressMetaSpacer">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="etaLabel">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="role" stdset="0">
+                <string notr="true">muted</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="rightPanelDivider">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="downloadSection" native="true">
+          <layout class="QVBoxLayout" name="downloadLayout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="downloadTitleLabel">
+             <property name="text">
+              <string>다운로드</string>
+             </property>
+             <property name="role" stdset="0">
+              <string notr="true">sectionTitle</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="formatButtonsLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="glbButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>GLB</string>
+               </property>
+               <property name="variant" stdset="0">
+                <string notr="true">format</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="fbxButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>FBX</string>
+               </property>
+               <property name="variant" stdset="0">
+                <string notr="true">format</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="objButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>OBJ</string>
+               </property>
+               <property name="variant" stdset="0">
+                <string notr="true">format</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="usdzButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>USDZ</string>
+               </property>
+               <property name="variant" stdset="0">
+                <string notr="true">format</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="stlButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>STL</string>
+               </property>
+               <property name="variant" stdset="0">
+                <string notr="true">format</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="formatButtonsSpacer">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="openOutputFolderButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>저장 폴더 열기</string>
+             </property>
+             <property name="variant" stdset="0">
+              <string notr="true">secondary</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="rightPanelSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="retentionNoteLabel">
+          <property name="text">
+           <string>Meshy 서버는 결과물을 3일만 보관합니다. 완료되면 앱이 자동으로 내려받습니다.</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="role" stdset="0">
+           <string notr="true">notice</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="mainMenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="fileMenu">
+    <property name="title">
+     <string>파일</string>
+    </property>
+    <addaction name="actionOpenImage"/>
+    <addaction name="actionOpenOutputFolder"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="helpMenu">
+    <property name="title">
+     <string>도움말</string>
+    </property>
+    <addaction name="actionOpenDocs"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="fileMenu"/>
+   <addaction name="helpMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="mainStatusBar"/>
+  <action name="actionOpenImage">
+   <property name="text">
+    <string>이미지 열기…</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionOpenOutputFolder">
+   <property name="text">
+    <string>저장 폴더 열기</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>설정…</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+,</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>종료</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionOpenDocs">
+   <property name="text">
+    <string>Meshy API 문서</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>Image to 3D 정보</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::AboutRole</enum>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>newJobButton</tabstop>
+  <tabstop>jobListWidget</tabstop>
+  <tabstop>changeImageButton</tabstop>
+  <tabstop>aiModelCombo</tabstop>
+  <tabstop>textureCheck</tabstop>
+  <tabstop>pbrCheck</tabstop>
+  <tabstop>topologyTriangleRadio</tabstop>
+  <tabstop>topologyQuadRadio</tabstop>
+  <tabstop>polycountSpin</tabstop>
+  <tabstop>generateButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>640</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>settingsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>actionSettings</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1240</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changeImageButton</sender>
+   <signal>clicked()</signal>
+   <receiver>actionOpenImage</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>500</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openOutputFolderButton</sender>
+   <signal>clicked()</signal>
+   <receiver>actionOpenOutputFolder</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1100</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="topologyButtonGroup"/>
+ </buttongroups>
+</ui>
