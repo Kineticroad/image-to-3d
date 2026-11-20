@@ -48,8 +48,6 @@
 - **PySide6 Designer UI**: 디자인을 바탕으로 Qt Designer용 `.ui` 파일과 변환된 `.py` 파일을 만들었습니다.
   - [`src/ui/main_window.ui`](src/ui/main_window.ui), [`src/ui/settings_dialog.ui`](src/ui/settings_dialog.ui), [`src/ui/job_item.ui`](src/ui/job_item.ui)
   - [`src/ui/styles/dark.qss`](src/ui/styles/dark.qss), [`src/ui/icons/`](src/ui/icons/)
-- **창 실행 코드**: 변환된 UI를 창으로 띄우는 코드를 작성했습니다.
-  - [`src/ui/windows.py`](src/ui/windows.py), [`src/main.py`](src/main.py)
 
 ## 실행
 
